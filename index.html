@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sotó | Alta Repostería por María Alejandra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --dorado: #c5a059;
+            --oscuro: #1a1a1a;
+            --crema: #fffcf9;
+            --texto: #444;
+            --sombra: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--crema); color: var(--texto); line-height: 1.6; }
+
+        /* Punto 8: Animaciones */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animar { animation: fadeUp 1s ease-out forwards; }
+        
+        @keyframes typedText { from { width: 0 } to { width: 100% } }
+        .typed-output { font-style: italic; color: var(--dorado); font-weight: bold; overflow: hidden; border-right: .15em solid; white-space: nowrap; animation: typedText 4s steps(40, end), blink-caret .5s step-end infinite; width: fit-content; }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--dorado); } }
+
+        header { background: white; padding: 25px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--oscuro); text-decoration: none; font-weight: 700; letter-spacing: 2px; }
+        nav ul { list-style: none; display: flex; gap: 25px; }
+        nav a { text-decoration: none; color: var(--oscuro); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav a:hover { color: var(--dorado); }
+
+        section { padding: 100px 20px; max-width: 1200px; margin: auto; text-align: center; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 50px; position: relative; display: inline-block; }
+        h2::after { content: ''; width: 60%; height: 3px; background: var(--dorado); position: absolute; bottom: -10px; left: 20%; }
+
+        /* Punto 4: Espacio para el video */
+        .seccion-video { background: #111; border: 2px solid var(--dorado); aspect-ratio: 16/9; width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; border-radius: 20px; margin: 40px auto; color: white; overflow: hidden; }
+        
+        /* Punto 4: INTEGRACIÓN DE TU FOTO REAL */
+        .tu-foto-espacio { width: 220px; height: 220px; border: 5px solid white; outline: 2px solid var(--dorado); border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); overflow: hidden; }
+        .tu-foto-espacio img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Punto 3: Galería de Postres (6 items funcionales) */
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
+        .postre-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--sombra); transition: 0.4s; position: relative; }
+        .postre-card:hover { transform: translateY(-15px); }
+        .postre-img { width: 100%; height: 300px; object-fit: cover; transition: 0.5s; }
+        .postre-card:hover .postre-img { scale: 1.05; }
+        .postre-info { padding: 30px; }
+        .postre-info h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 15px; color: var(--oscuro); }
+        .precio { color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
+
+        /* Punto 6: Gadgets */
+        .gadgets-container { background: var(--oscuro); color: white; padding: 60px 20px; border-radius: 30px; margin-top: 50px; }
+        .gadgets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        .gadget { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(197, 160, 89, 0.2); }
+        
+        button { background: var(--dorado); color: white; border: none; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; margin-top: 10px; width: 100%; transition: 0.3s; }
+        button:hover { background: #b08e4d; }
+
+        /* Punto 9: WhatsApp */
+        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; padding: 18px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; transition: 0.3s; }
+        .btn-ws:hover { transform: scale(1.1); }
+
+        /* Punto 10: Contador de visitas */
+        footer { background: var(--oscuro); color: white; padding: 60px 20px; margin-top: 80px; text-align: center; }
+    </style>
+</head>
+<body onload="contadorVisitas()">
+
+    <header>
+        <nav>
+            <a href="#" class="logo">SOTÓ</a>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#quienes-somos">Autora</a></li>
+                <li><a href="#productos">Menú</a></li>
+                <li><a href="#contactame">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <h1 class="animar" style="font-family: 'Playfair Display', serif; font-size: 4.5rem; line-height: 1;">Pasión por el <br><span class="typed-output">Detalle</span></h1>
+        
+        <div class="seccion-video">
+            <video controls muted class="video-placeholder">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section id="quienes-somos" style="background: white; border-radius: 50px; padding: 80px 40px;">
+        
+        <div class="tu-foto-espacio">
+            <img src="yo.jpg" alt="María Alejandra Soto Reyes">
+        </div>
+        
+        <h2>María Alejandra Soto Reyes</h2>
+        <p style="max-width: 800px; margin: auto; font-size: 1.2rem; color: #666;">Diseñadora de sabores y texturas. En mi estudio de Barrancabermeja, transformo la repostería tradicional en experiencias visuales dignas de galería. Cada postre es una pieza única creada con amor y precisión técnica.</p>
+    </section>
+
+    <section id="productos">
+        <h2>Colección Exclusiva</h2>
+        <div class="galeria">
+            <div class="postre-card animar">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" class="postre-img" alt="Tarta de fresa">
+                <div class="postre-info">
+                    <h3>Corona de Frutos Rojos</h3>
+                    <p>Mousse de vainilla de Papúa con corazón de frambuesa y cristales de azúcar.</p>
+                    <p class="precio">$25,000 COP</p>
+                </div>
+            </div>
+            <div class="postre-card animar" style="animation-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" class="postre-img" alt="Pastel chocolate">
+                <div class="postre-info">
+                    <h3>Obsidiana de Chocolate</h3>
+                    <p>Ganache de chocolate negro al 85% con destellos de oro de 24k comestible.</p>
+                    <p class="precio">$32,000 COP</p>
+                </div>
+            </div>
+            <div class="postre-card animar" style="animation-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80" class="postre-img" alt="Donas Gourmet">
+                <div class="postre-info">
+                    <h3>Donas de Terciopelo</h3>
+                    <p>Glaseado de lavanda y arándanos con perlas de chocolate blanco.</p>
+                    <p class="precio">$18,000 COP</p>
+                </div>
+            </div>
+            <div class="postre-card animar">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" class="postre-img" alt="Macaron Gigante">
+                <div class="postre-info">
+                    <h3>Macaron de Pistacho Real</h3>
+                    <p>Macaron artesanal de tamaño XL relleno de crema de pistacho y pétalos de rosa.</p>
+                    <p class="precio">$22,000 COP</p>
+                </div>
+            </div>
+            <div class="postre-card animar">
+                <img src="https://images.unsplash.com/photo-1533134242443-d4fd21531587?q=80&w=600&auto=format&fit=crop" class="postre-img" alt="Cheesecake">
+                <div class="postre-info">
+                    <h3>Esfera de Cheesecake</h3>
+                    <p>Queso crema infusionado con limón Meyer y base de galleta de mantequilla noisette.</p>
+                    <p class="precio">$24,000 COP</p>
+                </div>
+            </div>
+            <div class="postre-card animar">
+                <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=600&q=80" class="postre-img" alt="Mousse de Mango">
+                <div class="postre-info">
+                    <h3>Amanecer Tropical</h3>
+                    <p>Mousse de mango y maracuyá con un toque de coco tostado y flores de azahar.</p>
+                    <p class="precio">$20,000 COP</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interaccion">
+        <div class="gadgets-container">
+            <h2 style="color: white; margin-bottom: 30px;">Experiencia Interactiva</h2>
+            <div class="gadgets-grid">
+                <div class="gadget">
+                    <h4>¿Deseas probar uno?</h4>
+                    <button onclick="alert('¡Excelente elección! Te esperamos en el Atelier.')">¡Sí, lo quiero!</button>
+                </div>
+                <div class="gadget">
+                    <h4>Adivina</h4>
+                    <p>¿Ingrediente principal de Obsidiana?</p>
+                    <input type="text" id="juego" style="width: 100%; padding: 8px; border-radius: 10px; border: none; margin-top: 5px;">
+                    <button onclick="if(document.getElementById('juego').value.toLowerCase().includes('chocolate')) alert('¡Eres una experta!'); else alert('¡Casi! Es el Chocolate.')">Adivinar</button>
+                </div>
+                <div class="gadget">
+                    <h4>Presupuesto</h4>
+                    <input type="number" id="usd" placeholder="USD $" style="width: 100%; padding: 8px; border-radius: 10px; border: none;">
+                    <button onclick="alert('Precio en COP: $' + (document.getElementById('usd').value * 4000))">Convertir</button>
+                </div>
+                <div class="gadget">
+                    <h4>Atención</h4>
+                    <div id="reloj" style="font-size: 1.3rem; font-weight: bold; color: var(--dorado); margin-top: 10px;"></div>
+                </div>
+                <div class="gadget">
+                    <h4>Ubicación</h4>
+                    <p style="font-size: 0.8rem;">Barrancabermeja, Sector Centro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contactame">
+        <h2>Contáctame</h2>
+        <div style="max-width: 600px; margin: auto; text-align: left; background: white; padding: 40px; border-radius: 30px; box-shadow: var(--sombra);">
+            <p>📧 <b>Atelier:</b> maria.soto@sotopostres.co</p>
+            <p>📞 <b>Pedidos:</b> +57 300 123 4567</p>
+            <p>🏠 <b>Sede:</b> Carrera 24 #50-10, Barrancabermeja</p>
+            <hr style="margin: 20px 0; opacity: 0.2;">
+            <p style="text-align: center;">
+                <a href="https://instagram.com" target="_blank" style="color: var(--dorado); text-decoration: none; font-weight: bold;">INSTAGRAM</a> | 
+                <a href="https://facebook.com" target="_blank" style="color: var(--dorado); text-decoration: none; font-weight: bold;">FACEBOOK</a>
+            </p>
+        </div>
+    </section>
+
+    <a href="https://wa.me/573001234567" class="btn-ws" target="_blank">📲 Hablar con María Alejandra</a>
+
+    <footer>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; letter-spacing: 3px; color: var(--dorado);">SOTÓ</p>
+        <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">© 2026 María Alejandra Soto Reyes - Todos los derechos reservados.</p>
+        <p style="margin-top: 20px;">Personas antojadas hoy: <span id="cont" style="color: var(--dorado); font-weight: bold;">0</span></p>
+    </footer>
+
+    <script>
+        // Reloj Dinámico
+        setInterval(() => {
+            document.getElementById('reloj').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // Contador de Visitas Profesional (usando localStorage)
+        function contadorVisitas() {
+            let n = localStorage.getItem('visitas') || 240;
+            n++;
+            localStorage.setItem('visitas', n);
+            document.getElementById('cont').innerText = n;
+        }
+    </script>
+</body>
+</html>
